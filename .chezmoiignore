@@ -1,0 +1,5 @@
+README.md
+.zsh_history
+.tmux/resurrect/**
+.local/share/nvim/**
+.cache/**
