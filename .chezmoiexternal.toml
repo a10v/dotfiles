@@ -6,6 +6,7 @@
     exact = true
     stripComponents = 1
     refreshPeriod = "168h"
+
 [".oh-my-zsh/custom/plugins/zsh-syntax-highlighting"]
     type = "archive"
     url = "https://github.com/zsh-users/zsh-syntax-highlighting/archive/master.tar.gz"
@@ -40,19 +41,3 @@
     url           = "https://github.com/NvChad/NvChad.git"
     [".config/nvim".pull]
         args = ["--ff-only"]
-
-# --- macOS fonts -------------------------------------------------------------
-{{- if eq .chezmoi.os "darwin" }}
-["Library/Fonts/MesloLGS NF Regular.ttf"]
-    type = "file"
-    url = "https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS NF Regular.ttf"
-["Library/Fonts/MesloLGS NF Bold.ttf"]
-    type = "file"
-    url = "https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS NF Bold.ttf"
-["Library/Fonts/MesloLGS NF Italic.ttf"]
-    type = "file"
-    url = "https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS NF Italic.ttf"
-["Library/Fonts/MesloLGS NF Bold Italic.ttf"]
-    type = "file"
-    url = "https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS NF Bold Italic.ttf"
-{{- end }}
