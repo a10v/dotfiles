@@ -18,7 +18,7 @@ sh -c "$(curl -fsLS get.chezmoi.io)" && chezmoi init --apply https://github.com/
 
 ## Updating Pre-existing Machines
 
-With Chezmoi, running `chezmoi update` will pull all the changes from the repository. 
+With Chezmoi, running `chezmoi update` will pull all the changes from the repository (no need to re-initialize dotfiles). 
 
 ## Main Items/Tools:
 
@@ -27,7 +27,11 @@ With Chezmoi, running `chezmoi update` will pull all the changes from the reposi
 * oh-my-zsh w/ p10k
 * wezterm
 
-### Cross 
+### Critical Cross Platform CLI Tools:
+* git 
+* brew
+* ...
+
 ## To Be Added Soon:
 * ansible
 
