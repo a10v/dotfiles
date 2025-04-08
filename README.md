@@ -27,6 +27,7 @@ With Chezmoi, running `chezmoi update` will pull all the changes from the reposi
 * oh-my-zsh w/ p10k
 * wezterm
 
+### Cross 
 ## To Be Added Soon:
 * ansible
 
