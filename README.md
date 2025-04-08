@@ -16,6 +16,12 @@ Then run the following:
 sh -c "$(curl -fsLS get.chezmoi.io)" && chezmoi init --apply https://github.com/a10v/dotfiles.git
 ```
 
+In some cases, the above command does not work on Ubuntu machine. In those cases, use: 
+
+```shell 
+sh -c "$(curl -fsLS get.chezmoi.io)" -- init --apply $GITHUB_USERNAME
+```
+
 ## Updating Pre-existing Machines
 
 With Chezmoi, running `chezmoi update` will pull all the changes from the repository (no need to re-initialize dotfiles). 
