@@ -4,34 +4,51 @@ dotfiles are managed by [chezmoi](https://www.chezmoi.io)
 
 ## Run Command for New Machines
 
+For Ubuntu machines, run:
+
 ```shell
-export GITHUB_USERNAME=a10v
-sh -c "$(curl -fsLS get.chezmoi.io)" --init --apply $GITHUB_USERNAME
+cd ~/.local/
 ```
+
+Then run the following: 
+
+```shell
+sh -c "$(curl -fsLS get.chezmoi.io)" && chezmoi init --apply https://github.com/a10v/dotfiles.git
+```
+
+## Updating Pre-existing Machines
+
+With Chezmoi, running `chezmoi update` will pull all the changes from the repository. 
 
 ## Main Items/Tools:
 
 * tmux
 * nvim
 * oh-my-zsh w/ p10k
+* wezterm
 
-## Potential New Additions:
+## To Be Added Soon:
 * ansible
-* alacritty
 
 ## Notes for Ubuntu:
 
-Chezmoi binaries are downloaded to `~/.local/bin`, a directory which is not included in the $PATH variable. Thus, run the following commands **AFTER** installing the chezmoi binaries.
+Chezmoi binaries are downloaded to `~/.local/`, a directory which may not be included in the $PATH on a fresh machine. Thus, run the following commands **AFTER** installing the chezmoi binaries.
 
 ```shell
 # For Bash
 echo 'export PATH="$HOME/.local/bin:$PATH"' >> ~/.bashrc
 source ~/.bashrc
+
 # For zsh
 echo 'export PATH="$HOME/.local/bin:$PATH"' >> ~/.zshrc
 source ~/.zshrc
 
 # Verify with the following
-
 which chezmoi && chezmoi --version
+```
+
+Additionally, if `which chezmoi` returns nothing or `chezmoi not found`, cd into the `~/.local/` directory and re-run the following command:
+
+```shell
+sh -c "$(curl -fsLS get.chezmoi.io)"
 ```
