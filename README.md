@@ -64,7 +64,7 @@ chezmoi apply
 ```
 </details>
 
-### Main Tools Installed with chezmoi
+### Main Tools Installed with chezmoi:
 * tmux
 * nvim
 * oh-my-zsh w/ p10k
@@ -74,3 +74,25 @@ chezmoi apply
 * git 
 * brew
 * wezterm
+
+<details>
+  <summary>Misc Information</summary>
+In cases where you do not have sudo access, run the following command to install zsh (primarly for HPC machines):
+
+```shell
+conda install -y -c conda-forge zsh
+```
+
+If missing conda: 
+
+```shell
+wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O ~/miniconda.sh
+
+bash ~/miniconda.sh -b -p "$HOME/miniconda3"
+
+echo 'export PATH="$HOME/miniconda3/bin:$PATH"' >> ~/.bashrc
+source ~/.bashrc
+
+conda --version
+```
+  </details>
