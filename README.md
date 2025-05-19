@@ -2,64 +2,75 @@
 
 dotfiles are managed by [chezmoi](https://www.chezmoi.io)
 
-## Run Command for New Machines
+## New Machine Initialization
+For all machines run the below command:
 
-For Ubuntu machines, run:
+```shell
+sh -c "$(curl -fsLS get.chezmoi.io)" && which chezmoi 
+# For Linux machines it is generally a good idea to cd in .local
+cd 
+cd .local
+sh -c "$(curl -fsLS get.chezmoi.io)"
+
+chezmoi init --apply https://github.com/a10v/dotfiles.git
+
+# Sometimes chezmoi does not get integrated into the $PATH variable right off the bat, so use:
+
+~/.local/bin/chezmoi init --apply https://github.com/a10v/dotfiles.git
+```
+
+To update chezmoi after a new update to the repo use: `chezmoi apply`.
+
+### OS-specific Instructions - for (some problematic) Machines 
+
+<details>
+  <summary>Ubuntu Machines</summary>
+
+If the initial command does not work right off the bat, you should CD into the `.local` directory, run the install process, and everything should be fine. 
 
 ```shell
 cd ~/.local/
-```
 
-Then run the following: 
+# This command works on most ubuntu machines, but sometimes the path variable is not updated. In that case use options 2 or 3.
+# Option 1
+sh -c "$(curl -fsLS get.chezmoi.io)" && chezmoi init --apply https://github.com/a10v/dotfiles.git
+
+# Option 2
+sh -c "$(curl -fsLS get.chezmoi.io)" -- init --apply a10v
+
+# Option 3
+sh -c "$(curl -fsLS get.chezmoi.io)" && ~/.local/bin/chezmoi init --apply https://github.com/a10v/dotfiles.git
+```
+</details>
+
+<details>
+  <summary>Redhat Machines</summary>
+
+On Fedora machines (like HPC clusters), the repo may not clone correctly into using `chezmoi init --apply https://github.com/a10v/dotfiles.git`. As such, do the following after Chezmoi is successfully installed. 
 
 ```shell
-sh -c "$(curl -fsLS get.chezmoi.io)" && chezmoi init --apply https://github.com/a10v/dotfiles.git
+# Go into where the repo is actually stored, ~/.local/share/chezmoi/
+cd 
+cd .local/share
+
+# Remove failed chezmoi initialization
+rm -rf chezmoi
+
+git clone https://github.com/a10v/dotfiles.git chezmoi
+
+# Now re-initialzed chezmoi
+
+chezmoi apply
 ```
+</details>
 
-In some cases, the above command does not work on Ubuntu machine. In those cases, use: 
-
-```shell 
-sh -c "$(curl -fsLS get.chezmoi.io)" -- init --apply $GITHUB_USERNAME
-```
-
-## Updating Pre-existing Machines
-
-With Chezmoi, running `chezmoi update` will pull all the changes from the repository (no need to re-initialize dotfiles). 
-
-## Main Items/Tools:
-
+### Main Tools Installed with chezmoi
 * tmux
 * nvim
 * oh-my-zsh w/ p10k
-* wezterm
 
-### Critical Cross Platform CLI Tools:
+#### Auto-installs for following tools to be added soon:
+* ansible
 * git 
 * brew
-* ...
-
-## To Be Added Soon:
-* ansible
-
-## Notes for Ubuntu:
-
-Chezmoi binaries are downloaded to `~/.local/`, a directory which may not be included in the $PATH on a fresh machine. Thus, run the following commands **AFTER** installing the chezmoi binaries.
-
-```shell
-# For Bash
-echo 'export PATH="$HOME/.local/bin:$PATH"' >> ~/.bashrc
-source ~/.bashrc
-
-# For zsh
-echo 'export PATH="$HOME/.local/bin:$PATH"' >> ~/.zshrc
-source ~/.zshrc
-
-# Verify with the following
-which chezmoi && chezmoi --version
-```
-
-Additionally, if `which chezmoi` returns nothing or `chezmoi not found`, cd into the `~/.local/` directory and re-run the following command:
-
-```shell
-sh -c "$(curl -fsLS get.chezmoi.io)"
-```
+* wezterm
